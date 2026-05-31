@@ -38,7 +38,7 @@ export default function AboutSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-blue-400 font-medium mb-2 block uppercase tracking-widest text-sm">Tentang Saya</span>
+          <span className="text-blue-400 font-medium mb-2 block uppercase tracking-widest text-sm">about</span>
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
             Mengenal Lebih Dekat
           </h2>
