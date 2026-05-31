@@ -1,136 +1,76 @@
-import { motion } from 'framer-motion';
+"use client";
 
-const skills = {
-  frontend: [
-    { name: 'Vue.js', level: 100 },
-    { name: 'React', level: 95 },
-    { name: 'TypeScript', level: 90 },
-    { name: 'swift', level: 88 },
-    { name: 'Tailwind CSS', level: 95 },
-  ],
-  backend: [
-    { name: 'Node.js', level: 90 },
-    { name: 'Python', level: 98 },
-    { name: 'PostgreSQL', level: 88 },
-    { name: 'MongoDB', level: 90 },
-    { name: 'MySql', level: 92 },
-  ],
-  DevOps: [
-    { name: 'Git', level: 95 },
-    { name: 'Docker', level: 80 },
-    { name: 'AWS', level: 75 },
-    // { name: 'Figma', level: 85 },
-    { name: 'CI/CD', level: 82 },
-  ],
-};
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { BookOpen, Map, Users, ChevronDown } from 'lucide-react';
 
-function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
+export default function AboutSection() {
+  const [activeAccordion, setActiveAccordion] = useState(0);
+
+  const subjects = [
+    { icon: BookOpen, title: 'Sejarah', level: 95, content: 'Mempelajari Sejarah Dunia, Sejarah Indonesia, dan Politik Global dengan pemahaman mendalam.' },
+    { icon: Map, title: 'Geografi', level: 92, content: 'Menganalisis Geopolitik, Demografi, dan pengelolaan Sumber Daya Alam secara berkelanjutan.' },
+    { icon: Users, title: 'Sosial', level: 95, content: 'Mendalami Sosiologi, Ekonomi Makro, dan Antropologi untuk memahami dinamika masyarakat.' }
+  ];
+
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      className="space-y-2"
-    >
-      <div className="flex justify-between items-center">
-        <span className="font-medium">{name}</span>
-        <span className="text-sm text-muted-foreground">{level}%</span>
-      </div>
-      <div className="h-2 bg-muted rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: delay + 0.2, ease: 'easeOut' }}
-          className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-        />
-      </div>
-    </motion.div>
-  );
-}
-
-export default function SkillsSection() {
-  return (
-    <section id="skills" className="py-20 md:py-32">
+    <section id="about" className="py-20 md:py-32 bg-[#050a14] overflow-hidden text-slate-100">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-medium mb-2 block">Keahlian</span>
+          <span className="text-blue-400 font-medium mb-2 block uppercase tracking-widest text-sm">Kurikulum</span>
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Hard Skills
+            Bidang Studi IPS
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <div className="w-20 h-1 bg-blue-500 mx-auto rounded-full" />
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Frontend */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="p-6 glass rounded-2xl shadow-card hover:shadow-card-hover transition-shadow"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <span className="text-2xl">🎨</span>
-              </div>
-              <h3 className="font-display text-xl font-bold">Frontend</h3>
-            </div>
-            <div className="space-y-4">
-              {skills.frontend.map((skill, index) => (
-                <SkillBar key={skill.name} {...skill} delay={index * 0.1} />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Backend */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="p-6 glass rounded-2xl shadow-card hover:shadow-card-hover transition-shadow"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <span className="text-2xl">⚙️</span>
-              </div>
-              <h3 className="font-display text-xl font-bold">Backend</h3>
-            </div>
-            <div className="space-y-4">
-              {skills.backend.map((skill, index) => (
-                <SkillBar key={skill.name} {...skill} delay={index * 0.1} />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* DevOps */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="p-6 glass rounded-2xl shadow-card hover:shadow-card-hover transition-shadow"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <span className="text-2xl">🛠️</span>
-              </div>
-              <h3 className="font-display text-xl font-bold">DevOps</h3>
-            </div>
-            <div className="space-y-4">
-              {skills.DevOps.map((skill, index) => (
-                <SkillBar key={skill.name} {...skill} delay={index * 0.1} />
-              ))}
-            </div>
-          </motion.div>
+        <div className="max-w-4xl mx-auto space-y-4">
+          {subjects.map((item, index) => (
+            <motion.div 
+              key={index}
+              className="border border-slate-800 rounded-xl overflow-hidden bg-[#0a1120]/50"
+              initial={false}
+            >
+              <button
+                onClick={() => setActiveAccordion(activeAccordion === index ? -1 : index)}
+                className="w-full p-6 flex items-center justify-between text-left hover:bg-slate-800 transition-colors"
+              >
+                <div className="flex items-center gap-4">
+                  <item.icon className="text-blue-400 w-6 h-6" />
+                  <span className="font-display font-bold text-lg md:text-xl text-white">
+                    {item.title}
+                  </span>
+                </div>
+                <div className="flex items-center gap-4">
+                  {/* Persentase ditampilkan di sini */}
+                  <span className="font-bold text-blue-400 text-lg">{item.level}%</span>
+                  <ChevronDown 
+                    className={`transition-transform duration-300 ${activeAccordion === index ? 'rotate-180 text-blue-400' : 'text-slate-500'}`} 
+                  />
+                </div>
+              </button>
+              
+              <AnimatePresence>
+                {activeAccordion === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="p-6 pt-0 text-slate-400 leading-relaxed">
+                      {item.content}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
